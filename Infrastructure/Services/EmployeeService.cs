@@ -30,23 +30,23 @@ public class EmployeeService:IEmployeeService
         return employees;
     }
     
-    public async Task<EmployeeDto> GetEmployee(int id)
+    public async Task<UpdateEmployeeDto> GetEmployeeById(int id)
     {
         var employee = await _context.Employees
-            .Select(e => new EmployeeDto
+            .Select(e => new UpdateEmployeeDto()
             {
                 Id = e.Id,
                 Name = e.Name,
                 Email = e.Email,
                 Phone = e.Phone,
-                Department = e.Department.Name
+                DepartmentId = e.DepartmentId
             })
             .FirstOrDefaultAsync(e => e.Id == id);
         
         return employee;
     }
     
-    public async Task<EmployeeDto> CreateEmployee(AddEmployeeDto employeeDto)
+    public async Task<AddEmployeeDto> CreateEmployee(AddEmployeeDto employeeDto)
     {
         var employee = new Employee
         {
@@ -58,14 +58,12 @@ public class EmployeeService:IEmployeeService
         
         await _context.Employees.AddAsync(employee);
         await _context.SaveChangesAsync();
-        
         employeeDto.Id = employee.Id;
         
-        var employeeCreated = await GetEmployee(employee.Id);
-        return employeeCreated;
+        return employeeDto;
     }
     
-    public async Task<EmployeeDto> UpdateEmployee(UpdateEmployeeDto employeeDto)
+    public async Task<UpdateEmployeeDto> UpdateEmployee(UpdateEmployeeDto employeeDto)
     {
         var employee = await _context.Employees.FirstOrDefaultAsync(e => e.Id == employeeDto.Id);
         
@@ -81,8 +79,15 @@ public class EmployeeService:IEmployeeService
         
         await _context.SaveChangesAsync();
         
-        var employeeUpdated = await GetEmployee(employee.Id);
-        return employeeUpdated;
+        return new UpdateEmployeeDto()
+        {
+            Id = employee.Id,
+            Name = employee.Name,
+            Email = employee.Email,
+            Phone = employee.Phone,
+            DepartmentId = employee.DepartmentId
+        };
+        
     }
     
     public async Task<bool> DeleteEmployee(int id)

@@ -2,13 +2,13 @@
 @model List<Domain.Dtos.GetTutorDto>
 <a class="btn btn-primary" href="/tutor/create" role="button">Create</a> 
 <!-- Rotating card -->
-<div class="d-flex p-2 bd-highlight">
-<div class="card-wrapper" style="width: 400px; height: 100px">
+<div class="d-flex justify-content-between">
+      @foreach (var tutor in Model)
+{
+<div class="card-wrapper" style="width: 400px; height: 100%">
   <div id="card-1" class="card card-rotating text-center">
 
     <!-- Front Side -->
-    @foreach (var tutor in Model)
-{
     <div class="face front">
 
       <!-- Image-->
@@ -57,10 +57,10 @@
 
       </div>
     </div>
-}
     <!-- Back Side -->
 
   </div>
 </div>
+}
 </div>
 <!-- Rotating card -->

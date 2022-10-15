@@ -13,9 +13,9 @@ public class DepartmentController:Controller
         _departmentService = departmentService;
     }
     
+    //Get
     public async Task<IActionResult> Index()
-    {
-        //return list of departments 
+    { 
         var departments = await _departmentService.GetDepartments();
         return View(departments);
     }

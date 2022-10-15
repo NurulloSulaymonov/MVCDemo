@@ -1,0 +1,31 @@
+@model Domain.Dtos.AddTutorDto
+
+<form method="post" asp-action="Create">
+    <div class="form-group">
+        <label>Tutor FullName</label>
+        <input asp-for="FullName" type="text" class="form-control"  placeholder="Enter Tutor full name">
+        <span class="text-danger" asp-validation-for="FullName"></span>
+    </div>
+  <div class="form-group">
+        <label>Tutor Experience</label>
+      <textarea asp-for="Experience" class="form-control"  placeholder="Enter Tutor experience"></textarea>
+        <span class="text-danger" asp-validation-for="Experience"></span>
+    </div>
+  <div class="form-group">
+        <label>Tutor Image</label>
+      <textarea asp-for="Image" class="form-control"  placeholder="Enter Tutor image"></textarea>
+        <span class="text-danger" asp-validation-for="Image"></span>
+    </div>
+  <div class="form-group">
+        <label>Tutor BackgroundImage</label>
+      <textarea asp-for="BackgroundImage" class="form-control"  placeholder="Enter Tutor background image"></textarea>
+        <span class="text-danger" asp-validation-for="BackgroundImage"></span>
+    </div>
+  <div class="form-group">
+        <label>Tutor Position</label>
+      <textarea asp-for="Position" class="form-control"  placeholder="Enter Tutor position"></textarea>
+        <span class="text-danger" asp-validation-for="Position"></span>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
